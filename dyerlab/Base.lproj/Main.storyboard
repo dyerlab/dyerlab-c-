@@ -709,7 +709,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" id="x9b-70-AxO">
-                            <rect key="frame" x="1" y="23" width="448" height="276"/>
+                            <rect key="frame" x="1" y="0.0" width="448" height="299"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="VIb-aq-7lR" viewBased="YES" id="Tj3-Zi-TQE">
@@ -786,6 +786,9 @@
                                             </prototypeCellViews>
                                         </tableColumn>
                                     </tableColumns>
+                                    <connections>
+                                        <outlet property="cornerView" destination="aTB-lS-lUB" id="MgB-wh-e5N"/>
+                                    </connections>
                                 </tableView>
                             </subviews>
                         </clipView>
