@@ -86,6 +86,7 @@ class Individual {
     }
     
     
+    
 }
 
 
@@ -109,7 +110,23 @@ extension Individual : CustomStringConvertible {
             ret.append( String("\(self.loci[key] ?? Locus())"))
         }
         return ret.joined(separator: " ,")
-        
+    }
+    
+    func componentDescription( key: String ) -> String {
+        if self.strata.keys.contains(key) {
+            return self.strata[key]!
+        } else if key == "Latitude", let lat = self.getLatitude() {
+            return String("\(lat)")
+        } else if key == "Longitude", let lon = self.getLongitude() {
+            return String("\(lon)")
+        } else if self.external.keys.contains(key) {
+            return String("\(String(describing: self.external[key]))")
+        } else if self.loci.keys.contains(key) {
+            let val = self.loci[key]?.description
+            return val!
+        } else {
+            return ""
+        }
     }
 }
 

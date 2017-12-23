@@ -15,6 +15,15 @@ class Population {
             return self.individuals.count
         }
     }
+    var keys: [String] {
+        get {
+            if numIndividuals > 0 {
+                return self.individuals[0].keys()
+            } else {
+                return [String]()
+            }
+        }
+    }
     
     init() {
         self.individuals = [Individual]()
