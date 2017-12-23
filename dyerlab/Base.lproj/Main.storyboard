@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -785,26 +784,48 @@
         <!--Results Output View Controller-->
         <scene sceneID="bhk-fv-g3D">
             <objects>
-                <viewController title="Results Output View Controller" id="cxp-S6-VPg" sceneMemberID="viewController">
+                <viewController title="Results Output View Controller" id="cxp-S6-VPg" customClass="ResultsController" customModule="dyerlab" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="JgW-zD-eMZ">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DlT-PB-t5B">
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MI1-kb-1SR">
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
+                                <clipView key="contentView" id="LnZ-UK-gm1">
+                                    <rect key="frame" x="1" y="1" width="448" height="298"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="hZO-jR-w2l">
+                                            <rect key="frame" x="0.0" y="0.0" width="448" height="298"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="448" height="298"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                            <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="m9k-4x-xfk">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="YfN-Pe-tMu">
+                                    <rect key="frame" x="433" y="1" width="16" height="298"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="DlT-PB-t5B" firstAttribute="leading" secondItem="JgW-zD-eMZ" secondAttribute="leading" id="Fnq-MO-ecM"/>
-                            <constraint firstAttribute="trailing" secondItem="DlT-PB-t5B" secondAttribute="trailing" id="UQP-2m-Hcm"/>
-                            <constraint firstAttribute="bottom" secondItem="DlT-PB-t5B" secondAttribute="bottom" id="WBb-XI-K28"/>
-                            <constraint firstItem="DlT-PB-t5B" firstAttribute="top" secondItem="JgW-zD-eMZ" secondAttribute="top" id="rsi-RZ-Jih"/>
+                            <constraint firstItem="MI1-kb-1SR" firstAttribute="top" secondItem="JgW-zD-eMZ" secondAttribute="top" id="B6a-8k-nDG"/>
+                            <constraint firstAttribute="trailing" secondItem="MI1-kb-1SR" secondAttribute="trailing" id="Hts-2t-vU5"/>
+                            <constraint firstAttribute="bottom" secondItem="MI1-kb-1SR" secondAttribute="bottom" id="Xcj-Sw-c0k"/>
+                            <constraint firstItem="MI1-kb-1SR" firstAttribute="leading" secondItem="JgW-zD-eMZ" secondAttribute="leading" id="o9P-WC-ZDb"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textView" destination="hZO-jR-w2l" id="HFJ-dX-Bwh"/>
+                    </connections>
                 </viewController>
                 <customObject id="j3v-Dd-Oq3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

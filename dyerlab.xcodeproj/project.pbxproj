@@ -29,6 +29,7 @@
 		2A6C21851FE9953A00E7E588 /* IndividualDistances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6C21841FE9953A00E7E588 /* IndividualDistances.swift */; };
 		2A7E15EF1FEC0556003C5C9B /* arapat.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2A7E15EE1FEC0556003C5C9B /* arapat.csv */; };
 		2AA26B181FEE90960030EA9F /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA26B171FEE90960030EA9F /* MainWindowController.swift */; };
+		2AE6F0861FEE9D080041A4D2 /* ResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE6F0851FEE9D080041A4D2 /* ResultsController.swift */; };
 		2AFDB83F1FEADDBD00D6B628 /* GeneticTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFDB83E1FEADDBD00D6B628 /* GeneticTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		2A6C21841FE9953A00E7E588 /* IndividualDistances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualDistances.swift; sourceTree = "<group>"; };
 		2A7E15EE1FEC0556003C5C9B /* arapat.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = arapat.csv; sourceTree = "<group>"; };
 		2AA26B171FEE90960030EA9F /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		2AE6F0851FEE9D080041A4D2 /* ResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsController.swift; sourceTree = "<group>"; };
 		2AFDB83E1FEADDBD00D6B628 /* GeneticTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneticTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,8 +138,7 @@
 				2A6C213E1FE9928700E7E588 /* ViewController.swift */,
 				2A6C21401FE9928700E7E588 /* Assets.xcassets */,
 				2A6C21421FE9928700E7E588 /* Main.storyboard */,
-				2AA26B171FEE90960030EA9F /* MainWindowController.swift */,
-				2AFDB83E1FEADDBD00D6B628 /* GeneticTableViewController.swift */,
+				2AE560981FEE989900896E86 /* Controllers */,
 				2A6C21451FE9928700E7E588 /* Info.plist */,
 				2A6C21461FE9928700E7E588 /* dyerlab.entitlements */,
 				2A7E15EE1FEC0556003C5C9B /* arapat.csv */,
@@ -189,6 +190,16 @@
 				2A6C217F1FE9933D00E7E588 /* Vector.swift */,
 			);
 			path = Matrices;
+			sourceTree = "<group>";
+		};
+		2AE560981FEE989900896E86 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2AE6F0851FEE9D080041A4D2 /* ResultsController.swift */,
+				2AA26B171FEE90960030EA9F /* MainWindowController.swift */,
+				2AFDB83E1FEADDBD00D6B628 /* GeneticTableViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,6 +342,7 @@
 				2A6C216F1FE992E300E7E588 /* Locus.swift in Sources */,
 				2A6C21821FE9933D00E7E588 /* Matrix.swift in Sources */,
 				2A6C21811FE9933D00E7E588 /* Vector.swift in Sources */,
+				2AE6F0861FEE9D080041A4D2 /* ResultsController.swift in Sources */,
 				2A6C216E1FE992E300E7E588 /* Individual.swift in Sources */,
 				2AFDB83F1FEADDBD00D6B628 /* GeneticTableViewController.swift in Sources */,
 				2A6C21711FE992E300E7E588 /* Population.swift in Sources */,
