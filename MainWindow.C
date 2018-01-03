@@ -76,13 +76,31 @@ void MainWindow::makeUI() {
     m_dataSet = new DataSet(treeWidget, this);
 
     // set up some stylesheets
-    mainSplitter->setStyleSheet("QSplitter::handle { background: rgb(246,246,246); width: 1px;}");
+    /*
+    mainSplitter->setStyleSheet("");
     treeWidget->setStyleSheet("QTreeWidget { background-color: rgb(246,246,246); border: 1px solid rgb(246,246,246); }");
-    stackedWidget->setStyleSheet("QStackedWidget { border: 0px solid white; } ");
+    stackedWidget->setStyleSheet(" ");
     stackedWidget->setFrameShadow(QFrame::Plain);
     stackedWidget->setFrameStyle(QFrame::NoFrame);
     stackedWidget->setLineWidth(0);
     stackedWidget->setCurrentIndex(0);
+    */
+#ifdef Q_OS_MACOS
+    QFile file(":/styles/macos_style.qss");
+    if( file.open(QIODevice::ReadOnly )) {
+        QTextStream stream(&file);
+        QString styles = stream.readAll();
+        qDebug() << "Styles";
+        qDebug().noquote() << styles;
+        this->setStyleSheet( styles );
+    }
+    else {
+        qDebug() << "Could not open file.";
+    }
+    file.close();
+#endif
+
+
 
 }
 

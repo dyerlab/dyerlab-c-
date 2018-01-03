@@ -2,8 +2,15 @@ QTreeWidget {
     background-color: red;
 }
 
-
-QSplitter {
-    background-color: red;
+QStackedWidget {
+    border: 0px solid white;
 }
 
+QSplitter {
+    background-color: rgb(246,246,246);
+}
+
+QSplitter::handle {
+    background: rgb(246,246,246);
+    width: 1px;
+}
