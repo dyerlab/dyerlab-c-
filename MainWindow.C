@@ -3,6 +3,7 @@
 #include "FileIO.H"
 
 #include <QMenu>
+#include <QFrame>
 #include <QMenuBar>
 #include <QSettings>
 #include <QHeaderView>
@@ -15,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     makeActions();
     makeMenus();
     makeUI();
+
 }
 
 MainWindow::~MainWindow() {
@@ -54,7 +56,6 @@ void MainWindow::makeUI() {
     treeWidget->setColumnCount(1);
     treeWidget->header()->hide();
     treeWidget->setAttribute(Qt::WA_MacShowFocusRect, 0);
-    //treeWidget->header()->hide();
 
     stackedWidget = new QStackedWidget();
     tableView = new QTableView();
@@ -62,7 +63,6 @@ void MainWindow::makeUI() {
 
     webEngineView = new QWebEngineView();
     stackedWidget->addWidget( webEngineView );
-    stackedWidget->setCurrentIndex(0);
 
     mainSplitter->addWidget( treeWidget );
     mainSplitter->addWidget( stackedWidget );
@@ -71,6 +71,19 @@ void MainWindow::makeUI() {
     restoreGeometry( settings.value("geometry").toByteArray() );
     restoreState( settings.value("windowState").toByteArray() );
     mainSplitter->restoreState( settings.value("splitterState").toByteArray());
+
+    // make the data
+    m_dataSet = new DataSet(treeWidget, this);
+
+    // set up some stylesheets
+    mainSplitter->setStyleSheet("QSplitter::handle { background: rgb(246,246,246); width: 1px;}");
+    treeWidget->setStyleSheet("QTreeWidget { background-color: rgb(246,246,246); border: 1px solid rgb(246,246,246); }");
+    stackedWidget->setStyleSheet("QStackedWidget { border: 0px solid white; } ");
+    stackedWidget->setFrameShadow(QFrame::Plain);
+    stackedWidget->setFrameStyle(QFrame::NoFrame);
+    stackedWidget->setLineWidth(0);
+    stackedWidget->setCurrentIndex(0);
+
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
@@ -88,7 +101,6 @@ void MainWindow::slotImportAction() {
     QString path  = ":/data/pedima_baja.csv";
 
     // Make the new data set
-    m_dataSet = new DataSet(treeWidget, this);
     m_dataSet->addPopulation( loadIndividualsFromFile(path, 1, 2, 6 ) );
 
     // connect the table model to the table;
@@ -96,9 +108,6 @@ void MainWindow::slotImportAction() {
     m_dataSet->appendToLog("Setting TableModel");
     tableView->setModel( m_tableModel );
 
-    // connect the TreeView up
-    //m_treeModel = m_dataSet->getTreeModel();
-    //treeView->setModel( m_treeModel );
 
 }
 

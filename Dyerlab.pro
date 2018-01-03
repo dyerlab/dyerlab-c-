@@ -36,7 +36,7 @@ SOURCES += \
     AnalysisBase.C \
     AlleleFrequencies.C \
     Frequencies.C \
-    AnalysisObject.C
+    ResultObject.C
 
 HEADERS += \
         MainWindow.H \
@@ -50,11 +50,23 @@ HEADERS += \
     AnalysisBase.H \
     AlleleFrequencies.H \
     Frequencies.H \
-    AnalysisObject.H
+    ResultObject.H
+
+mac {
+
+OBJECTIVE_SOURCES += \
+    UnifiedWindow.mm
+HEADERS  +=\
+    UnifiedWindow.h
+
+
+LIBS += -framework Foundation -framework Cocoa
+}
 
 FORMS +=
 
 DISTFILES +=
 
 RESOURCES += \
-    data.qrc
+    data.qrc \
+    styles.qrc

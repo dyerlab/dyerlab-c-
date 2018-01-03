@@ -8,7 +8,7 @@
 #include "TreeItem.H"
 #include "TreeModel.H"
 #include "Population.H"
-#include "AnalysisObject.H"
+#include "ResultObject.H"
 
 
 class DataSet : public QObject
@@ -37,7 +37,7 @@ private:
     QString m_log;
     Population *m_population;
     QTreeWidget *m_treeWidget;
-    QList<AnalysisObject*> m_analysisObjects;
+    QList<ResultObject*> m_analysisObjects;
 
 };
 

@@ -11,7 +11,6 @@ DataSet::DataSet(QTreeWidget *treeWidget, QObject *parent) : QObject(parent) {
 }
 
 DataSet::~DataSet(){
-    delete m_population;
 }
 
 void DataSet::addPopulation( Population *population ) {
@@ -25,7 +24,7 @@ void DataSet::addPopulation( Population *population ) {
     QTreeWidgetItem *itm = new QTreeWidgetItem( m_treeWidget, TREE_OBJECT_TYPE_GENOTYPES );
     itm->setText(0,tr("Genotypes"));
     itm->setSelected( true );
-    AnalysisObject *obj = new AnalysisObject(itm, TREE_OBJECT_TYPE_GENOTYPES );
+    ResultObject *obj = new ResultObject(itm, TREE_OBJECT_TYPE_GENOTYPES );
     m_analysisObjects.append( obj );
 }
 

@@ -1,0 +1,9 @@
+QTreeWidget {
+    background-color: red;
+}
+
+
+QSplitter {
+    background-color: red;
+}
+
