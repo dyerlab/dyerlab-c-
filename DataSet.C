@@ -25,7 +25,7 @@ void DataSet::addPopulation( Population *population ) {
     itm->setText(0,tr("Genotypes"));
     itm->setSelected( true );
     ResultObject *obj = new ResultObject(itm, TREE_OBJECT_TYPE_GENOTYPES );
-    m_analysisObjects.append( obj );
+    m_resultObjects.append( obj );
 }
 
 

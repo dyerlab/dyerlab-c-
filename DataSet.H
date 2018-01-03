@@ -37,7 +37,7 @@ private:
     QString m_log;
     Population *m_population;
     QTreeWidget *m_treeWidget;
-    QList<ResultObject*> m_analysisObjects;
+    QList<ResultObject*> m_resultObjects;
 
 };
 
