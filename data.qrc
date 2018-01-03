@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/data">
+        <file>pedima_baja.csv</file>
+    </qresource>
+</RCC>
