@@ -1,29 +1,25 @@
 #ifndef DATASET_H
 #define DATASET_H
 
+#include <QList>
 #include <QObject>
 #include <QTreeWidgetItem>
 
 #include "TreeItem.H"
 #include "TreeModel.H"
 #include "Population.H"
+#include "AnalysisObject.H"
 
-typedef enum {
-    TREE_WIDGET_TYPE_FOLDER,
-    TREE_WIDGET_TYPE_GENOTYPES,
-    TREE_WIDGET_TYPE_WEB,
-    TREE_WIDGET_TYPE_MAP,
-    TREE_WIDGET_TYPE_TEXT
-} TREE_WIDGET_TYPE;
 
 class DataSet : public QObject
 {
     Q_OBJECT
 public:
-    explicit DataSet(QObject *parent = nullptr);
+    explicit DataSet(QTreeWidget *treeWidget, QObject *parent = nullptr);
     ~DataSet();
 
-    void addComponents( Population *population, QTreeWidget *treeWidget );
+    void addPopulation( Population *population );
+
 
     inline Population* getPopulation() const                { return m_population; }
     inline Individual* getIndividual( int idx ) const       { return m_population->getIndividual( idx ); }
@@ -40,8 +36,8 @@ public slots:
 private:
     QString m_log;
     Population *m_population;
-    QTreeWidgetItem *m_widgetItem;
-
+    QTreeWidget *m_treeWidget;
+    QList<AnalysisObject*> m_analysisObjects;
 
 };
 

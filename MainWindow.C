@@ -88,8 +88,8 @@ void MainWindow::slotImportAction() {
     QString path  = ":/data/pedima_baja.csv";
 
     // Make the new data set
-    m_dataSet = new DataSet();
-    m_dataSet->addComponents( loadIndividualsFromFile(path, 1, 2, 6 ), treeWidget );
+    m_dataSet = new DataSet(treeWidget, this);
+    m_dataSet->addPopulation( loadIndividualsFromFile(path, 1, 2, 6 ) );
 
     // connect the table model to the table;
     m_tableModel = new TableModel( m_dataSet->getPopulation() );

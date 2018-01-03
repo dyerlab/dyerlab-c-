@@ -35,7 +35,8 @@ SOURCES += \
     TableModel.C \
     AnalysisBase.C \
     AlleleFrequencies.C \
-    Frequencies.C
+    Frequencies.C \
+    AnalysisObject.C
 
 HEADERS += \
         MainWindow.H \
@@ -48,7 +49,8 @@ HEADERS += \
     TableModel.H \
     AnalysisBase.H \
     AlleleFrequencies.H \
-    Frequencies.H
+    Frequencies.H \
+    AnalysisObject.H
 
 FORMS +=
 
