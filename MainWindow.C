@@ -4,8 +4,11 @@
 
 #include <QMenu>
 #include <QFrame>
+#include <QDialog>
 #include <QMenuBar>
 #include <QSettings>
+#include <QMessageBox>
+#include <QVBoxLayout>
 #include <QHeaderView>
 #include <QApplication>
 
@@ -24,9 +27,9 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::makeActions() {
-    importAction = new QAction( tr("&Import"),this );
-    importAction->setShortcut(tr("CTRL+I"));
-    connect( importAction, SIGNAL(triggered(bool)), this, SLOT( slotImportAction()));
+    importGenotypeAction = new QAction( tr("&Genotypes"),this );
+    importGenotypeAction->setShortcut(tr("CTRL+G"));
+    connect( importGenotypeAction, SIGNAL(triggered(bool)), this, SLOT( slotImportGenotypes()));
 
     showLogAction = new QAction( tr("&Log"), this);
     showLogAction->setShortcut(tr("CTRL+L") );
@@ -40,7 +43,10 @@ void MainWindow::makeActions() {
 
 void MainWindow::makeMenus() {
     QMenu *fileMenu = menuBar()->addMenu(tr("&File"));
-    fileMenu->addAction( importAction );
+    QMenu *importMenu = fileMenu->addMenu( tr("&Import") );
+    importMenu->addAction( importGenotypeAction );
+
+    fileMenu->addMenu( importMenu );
     fileMenu->addSeparator();
     fileMenu->addAction( quitAction );
 
@@ -50,23 +56,31 @@ void MainWindow::makeMenus() {
 
 void MainWindow::makeUI() {
     mainSplitter = new QSplitter(this);
+    mainSplitter->setFrameStyle(QFrame::NoFrame);
     setCentralWidget(mainSplitter);
 
+    QWidget *treeMainWidget = new QWidget();
+    treeMainWidget->setObjectName("TreeMainWidget");
+    QVBoxLayout *treeLayout = new QVBoxLayout();
+    treeLayout->setContentsMargins(0,20,0,0);
+    treeMainWidget->setLayout( treeLayout );
+    //treeLayout->insertSpacing(0,20);
     treeWidget = new QTreeWidget();
     treeWidget->setColumnCount(1);
     treeWidget->header()->hide();
     treeWidget->setAttribute(Qt::WA_MacShowFocusRect, 0);
+    treeLayout->addWidget(treeWidget);
 
+    QWidget *stackedMainWidget = new QWidget();
+    stackedMainWidget->setObjectName("StackedWidgetWidget");
+    QVBoxLayout *stackedLayout = new QVBoxLayout();
+    stackedMainWidget->setLayout( stackedLayout );
+    stackedLayout->insertSpacing(0,1);
     stackedWidget = new QStackedWidget();
-    tableView = new QTableView();
-    stackedWidget->addWidget( tableView );
+    stackedLayout->addWidget( stackedWidget );
 
-    webEngineView = new QWebEngineView();
-    stackedWidget->addWidget( webEngineView );
-    stackedWidget->setCurrentIndex(0);
-
-    mainSplitter->addWidget( treeWidget );
-    mainSplitter->addWidget( stackedWidget );
+    mainSplitter->addWidget( treeMainWidget );
+    mainSplitter->addWidget( stackedMainWidget );
 
     QSettings settings("Dyerlab","Dyerlab");
     restoreGeometry( settings.value("geometry").toByteArray() );
@@ -74,7 +88,7 @@ void MainWindow::makeUI() {
     mainSplitter->restoreState( settings.value("splitterState").toByteArray());
 
     // make the data
-    m_dataSet = new DataSet(treeWidget, this);
+    m_dataSet = new DataSet(treeWidget, stackedWidget, this);
 
     // set up some stylesheets
 #ifdef Q_OS_MACOS
@@ -104,19 +118,20 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 }
 
 
+void MainWindow::enableMenuItems( bool enabled ){
+    importGenotypeAction->setEnabled( !enabled );
+}
 
-void MainWindow::slotImportAction() {
+void MainWindow::slotImportGenotypes() {
     QString path  = ":/data/pedima_baja.csv";
-
-    // Make the new data set
-    m_dataSet->addPopulation( loadIndividualsFromFile(path, 1, 2, 6 ) );
-
-    // connect the table model to the table;
-    m_tableModel = new TableModel( m_dataSet->getPopulation() );
-    m_dataSet->appendToLog("Setting TableModel");
-    tableView->setModel( m_tableModel );
-
-
+    if( m_dataSet->loadPopulation( path, 1, 2, 6 ) ) {
+        enableMenuItems(true);
+    } else {
+        QMessageBox dlg;
+        dlg.setText(tr("Unable to import genotype file"));
+        dlg.setIcon(QMessageBox::Warning);
+        dlg.exec();
+    }
 }
 
 void MainWindow::slotShowLog() {

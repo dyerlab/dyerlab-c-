@@ -1,6 +1,7 @@
 #ifndef ANALYSISOBJECT_H
 #define ANALYSISOBJECT_H
 
+#include <QWidget>
 #include <QTreeWidgetItem>
 
 typedef enum {
@@ -19,9 +20,10 @@ public:
     ResultObject(QTreeWidgetItem *item, TREE_OBJECT_TYPE type = TREE_OBJECT_TYPE_UNDEF);
 
     inline TREE_OBJECT_TYPE objectType()        { return m_treeObjectType; }
-
+    inline QWidget* getWidget()                 { return m_widget; }
 
 protected:
+    QWidget *m_widget;
     QTreeWidgetItem *m_treeWidgetItem;
     TREE_OBJECT_TYPE m_treeObjectType;
 

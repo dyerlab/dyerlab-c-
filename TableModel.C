@@ -30,28 +30,32 @@ QVariant TableModel::headerData(int section, Qt::Orientation orientation, int ro
         if( orientation == Qt::Horizontal )
             return QVariant( m_headers.at(section) );
 
-        else if( orientation == Qt::Vertical )
-            return QVariant( section );
     }
     else if( role == Qt::ForegroundRole && orientation == Qt::Horizontal && m_population->count() ) {
         QString key = m_headers.at(section);
         DATA_KEY_TYPE type = m_population->getIndividual(0)->getType( key );
+        int col = 128;
+        int alpha = 50;
+        QColor color;
         if( type == DATA_KEY_TYPE_LOCUS ) {
-            return QVariant( QBrush( Qt::darkRed ) );
+            color = QColor(col,0,0,alpha);
+            return QVariant( QBrush( color ) );
         }
         else if( type == DATA_KEY_TYPE_STRATUM ) {
-            return QVariant( QBrush( Qt::darkGreen ) );
+            color = QColor(0,col,0,alpha);
+            return QVariant( QBrush( color ) );
         }
         else if( type == DATA_KEY_TYPE_COORDINATE ) {
-            return QVariant( QBrush( Qt::darkBlue ) );
+            color = QColor(0,0,col,alpha);
+            return QVariant( QBrush( color ) );
         }
         else {
-            return QVariant( QBrush( Qt::black ) );
+            color = QColor(0,0,0,alpha);
+            return QVariant( QBrush( color ) );
         }
     }
 
     return QVariant();
-
 }
 
 

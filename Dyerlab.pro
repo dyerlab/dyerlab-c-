@@ -36,7 +36,8 @@ SOURCES += \
     AnalysisBase.C \
     AlleleFrequencies.C \
     Frequencies.C \
-    ResultObject.C
+    ResultObject.C \
+    GeneticObject.C
 
 HEADERS += \
         MainWindow.H \
@@ -50,7 +51,8 @@ HEADERS += \
     AnalysisBase.H \
     AlleleFrequencies.H \
     Frequencies.H \
-    ResultObject.H
+    ResultObject.H \
+    GeneticObject.H
 
 mac {
 

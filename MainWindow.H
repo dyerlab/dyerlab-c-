@@ -27,13 +27,9 @@ public:
 
 private:
 
-    QAction *importAction;
+    QAction *importGenotypeAction;
     QAction *showLogAction;
     QAction *quitAction;
-
-    QAction *newGridAction;
-    QAction *newResultsAction;
-    QAction *newMapAction;
 
     QSplitter *mainSplitter;
     QTreeWidget *treeWidget;
@@ -51,11 +47,11 @@ private:
     void makeMenus();
     void makeUI();
 
-
+    void enableMenuItems(bool enabled );
 
 
 public slots:
-    void slotImportAction();
+    void slotImportGenotypes();
     void slotShowLog();
 
 };
