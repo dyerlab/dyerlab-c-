@@ -13,6 +13,8 @@ class GeneticObject : public ResultObject  {
 public:
     GeneticObject(Population *population, QTreeWidgetItem *item, TREE_OBJECT_TYPE type = TREE_OBJECT_TYPE_GENOTYPES);
 
+    inline Population* getPopulation()      { return m_population; }
+
 private:
     Population *m_population;
     TableModel *m_tableModel;

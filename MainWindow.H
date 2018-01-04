@@ -28,15 +28,15 @@ public:
 private:
 
     QAction *importGenotypeAction;
-    QAction *showLogAction;
     QAction *quitAction;
+
+    QAction *showLogAction;
+
+    QAction *makeMapAction;
 
     QSplitter *mainSplitter;
     QTreeWidget *treeWidget;
     QStackedWidget *stackedWidget;
-
-    QTableView *tableView;
-    QWebEngineView *webEngineView;
 
     DataSet *m_dataSet;
     LogWindow *m_logWindow;
@@ -54,8 +54,10 @@ private:
 
 public slots:
     void slotImportGenotypes();
+    void slotMakeMap();
     void slotShowLog();
     void slotQuit();
+
 
 };
 

@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QString>
 #include <QDateTime>
+#include <QGeoCoordinate>
 
 DataSet::DataSet(QTreeWidget *treeWidget, QStackedWidget *stackedWidget, QObject *parent) : QObject(parent) {
 
@@ -46,7 +47,40 @@ bool DataSet::loadPopulation(QString path, int strata, int coords, int loci) {
     return true;
 }
 
+Population* DataSet::getPopulation() {
 
+    foreach(ResultObject *obj, m_resultObjects ){
+        TREE_OBJECT_TYPE type = obj->objectType();
+        if( type == TREE_OBJECT_TYPE_GENOTYPES ){
+            GeneticObject *gen = static_cast<GeneticObject*>(obj);
+            if( gen ) {
+                return gen->getPopulation();
+            }
+
+        }
+    }
+
+    return NULL;
+}
+
+
+bool DataSet::makeMap() {
+    Population *thePop = getPopulation();
+    if( !thePop )
+        return false;
+    QList<QGeoCoordinate> coords;
+    for(int i=0;i<thePop->count();i++){
+        QGeoCoordinate c = thePop->getIndividual(i)->getCoordinate();
+        if( c.isValid() )
+            coords.append( c );
+    }
+    if( !coords.count() )
+        return false;
+
+    //TODO: Add conversion to GeoJSON from
+
+    return true;
+}
 
 void DataSet::appendToLog( QString msg ) {
     QString now = QDateTime::currentDateTime().toLocalTime().toString(Qt::ISODateWithMs);

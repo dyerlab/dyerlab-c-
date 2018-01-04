@@ -48,6 +48,11 @@ void MainWindow::makeActions() {
     importGenotypeAction->setShortcut(tr("CTRL+G"));
     connect( importGenotypeAction, SIGNAL(triggered(bool)), this, SLOT( slotImportGenotypes()));
 
+    makeMapAction = new QAction( tr("Create"));
+    makeMapAction->setShortcut(tr("CTRL+M"));
+    makeMapAction->setEnabled(false);
+    connect( makeMapAction, SIGNAL( triggered(bool)), this, SLOT( slotMakeMap()) );
+
     showLogAction = new QAction( tr("&Log"), this);
     showLogAction->setShortcut(tr("CTRL+L") );
     connect( showLogAction, SIGNAL(triggered(bool)), this , SLOT( slotShowLog()) );
@@ -66,6 +71,9 @@ void MainWindow::makeMenus() {
     fileMenu->addMenu( importMenu );
     fileMenu->addSeparator();
     fileMenu->addAction( quitAction );
+
+    QMenu *mapMenu = menuBar()->addMenu(tr("&Map"));
+    mapMenu->addAction(makeMapAction);
 
     QMenu *viewMenu = menuBar()->addMenu(tr("&View"));
     viewMenu->addAction( showLogAction );
@@ -99,8 +107,6 @@ void MainWindow::makeUI() {
     mainSplitter->addWidget( treeMainWidget );
     mainSplitter->addWidget( stackedMainWidget );
 
-
-
     // make the data
     m_dataSet = new DataSet(treeWidget, stackedWidget, this);
 
@@ -129,6 +135,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 
 void MainWindow::enableMenuItems( bool enabled ){
     importGenotypeAction->setEnabled( !enabled );
+    makeMapAction->setEnabled( enabled );
 }
 
 
@@ -167,4 +174,8 @@ void MainWindow::slotShowLog() {
         qDebug() << "Nothing loaded yet";
     }
 
+}
+
+void MainWindow::slotMakeMap() {
+    qDebug() << "SlotMakemap";
 }

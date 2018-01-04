@@ -20,10 +20,13 @@ public:
     ~DataSet();
 
     bool loadPopulation( QString path, int strata, int coords, int loci );
+    Population* getPopulation();
+
+    bool makeMap();
 
     void setNewObject( ResultObject *obj );
     void appendToLog( QString msg );
-    inline QString getLog() const                           { return m_log; }
+    inline QString getLog() const             { return m_log; }
 
 signals:
 
