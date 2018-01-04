@@ -20,7 +20,6 @@ public:
 
     void addPopulation( Population *population );
 
-
     inline Population* getPopulation() const                { return m_population; }
     inline Individual* getIndividual( int idx ) const       { return m_population->getIndividual( idx ); }
     inline QVariant getData( int idx, QString key) const    { return getIndividual(idx)->getData(key); }

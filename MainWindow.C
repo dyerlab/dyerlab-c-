@@ -63,6 +63,7 @@ void MainWindow::makeUI() {
 
     webEngineView = new QWebEngineView();
     stackedWidget->addWidget( webEngineView );
+    stackedWidget->setCurrentIndex(0);
 
     mainSplitter->addWidget( treeWidget );
     mainSplitter->addWidget( stackedWidget );
@@ -76,22 +77,11 @@ void MainWindow::makeUI() {
     m_dataSet = new DataSet(treeWidget, this);
 
     // set up some stylesheets
-    /*
-    mainSplitter->setStyleSheet("");
-    treeWidget->setStyleSheet("QTreeWidget { background-color: rgb(246,246,246); border: 1px solid rgb(246,246,246); }");
-    stackedWidget->setStyleSheet(" ");
-    stackedWidget->setFrameShadow(QFrame::Plain);
-    stackedWidget->setFrameStyle(QFrame::NoFrame);
-    stackedWidget->setLineWidth(0);
-    stackedWidget->setCurrentIndex(0);
-    */
 #ifdef Q_OS_MACOS
     QFile file(":/styles/macos_style.qss");
     if( file.open(QIODevice::ReadOnly )) {
         QTextStream stream(&file);
         QString styles = stream.readAll();
-        qDebug() << "Styles";
-        qDebug().noquote() << styles;
         this->setStyleSheet( styles );
     }
     else {

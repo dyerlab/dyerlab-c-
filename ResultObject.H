@@ -21,7 +21,7 @@ public:
     inline TREE_OBJECT_TYPE objectType()        { return m_treeObjectType; }
 
 
-private:
+protected:
     QTreeWidgetItem *m_treeWidgetItem;
     TREE_OBJECT_TYPE m_treeObjectType;
 

@@ -1,5 +1,9 @@
+QMainWindow {
+    background-color: white; 
+}
+
 QTreeWidget {
-    background-color: red;
+    background-color: rgb(246,246,246);
 }
 
 QStackedWidget {
