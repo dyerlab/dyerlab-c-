@@ -20,10 +20,27 @@ MainWindow::MainWindow(QWidget *parent)
     makeMenus();
     makeUI();
 
+    loadSettings();
 }
 
 MainWindow::~MainWindow() {
+}
 
+void MainWindow::saveSettings() {
+    QSettings settings("Dyerlab","Dyerlab");
+    settings.setValue("geometry", saveGeometry() );
+    settings.setValue("windowState", saveState() );
+    settings.setValue("splitter/state", mainSplitter->saveState() );
+    settings.setValue("splitter/geometry", mainSplitter->saveGeometry() );
+}
+
+
+void MainWindow::loadSettings() {
+    QSettings settings("Dyerlab","Dyerlab");
+    restoreGeometry( settings.value("geometry").toByteArray() );
+    restoreState( settings.value("windowState").toByteArray() );
+    mainSplitter->restoreState( settings.value("splitter/state").toByteArray());
+    mainSplitter->restoreGeometry( settings.value("splitter/geometry").toByteArray() );
 }
 
 void MainWindow::makeActions() {
@@ -37,7 +54,7 @@ void MainWindow::makeActions() {
 
     quitAction = new QAction( tr("&Quit"), this);
     quitAction->setShortcut(tr("CTRL+Q"));
-    connect( quitAction, SIGNAL( triggered(bool)), qApp, SLOT( quit()) );
+    connect( quitAction, SIGNAL( triggered(bool)), this, SLOT( slotQuit())  );
 
 }
 
@@ -82,10 +99,7 @@ void MainWindow::makeUI() {
     mainSplitter->addWidget( treeMainWidget );
     mainSplitter->addWidget( stackedMainWidget );
 
-    QSettings settings("Dyerlab","Dyerlab");
-    restoreGeometry( settings.value("geometry").toByteArray() );
-    restoreState( settings.value("windowState").toByteArray() );
-    mainSplitter->restoreState( settings.value("splitterState").toByteArray());
+
 
     // make the data
     m_dataSet = new DataSet(treeWidget, stackedWidget, this);
@@ -109,18 +123,21 @@ void MainWindow::makeUI() {
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
-    QSettings settings("Dyerlab","Dyerlab");
-    settings.setValue("geometry", saveGeometry() );
-    settings.setValue("windowState", saveState() );
-    settings.setValue("splitterState", mainSplitter->saveState() );
-
+    saveSettings();
     QMainWindow::closeEvent( event );
 }
-
 
 void MainWindow::enableMenuItems( bool enabled ){
     importGenotypeAction->setEnabled( !enabled );
 }
+
+
+
+
+
+
+
+
 
 void MainWindow::slotImportGenotypes() {
     QString path  = ":/data/pedima_baja.csv";
@@ -133,6 +150,12 @@ void MainWindow::slotImportGenotypes() {
         dlg.exec();
     }
 }
+
+void MainWindow::slotQuit() {
+    saveSettings();
+    qApp->quit();
+}
+
 
 void MainWindow::slotShowLog() {
     if( m_dataSet ) {

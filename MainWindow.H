@@ -48,11 +48,14 @@ private:
     void makeUI();
 
     void enableMenuItems(bool enabled );
+    void saveSettings();
+    void loadSettings();
 
 
 public slots:
     void slotImportGenotypes();
     void slotShowLog();
+    void slotQuit();
 
 };
 
