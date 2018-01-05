@@ -31,8 +31,8 @@ Population* loadIndividualsFromFile( QString path, int strata, int coords, int l
                     idx = header.indexOf("Latitude");
                     if( idx != -1 )
                         lat = row.at(idx).toDouble();
-                    QGeoCoordinate coord(lat,lon);
-                    if( coord.isValid()) {
+                    QGeoCoordinate *coord = new QGeoCoordinate(lat,lon);
+                    if( coord->isValid()) {
                         ind->addCoordinate(coord);
                         ctr+=2;
                     }

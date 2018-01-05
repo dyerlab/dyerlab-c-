@@ -14,9 +14,9 @@ QVariant Individual::getData( QString key ) {
     else if (m_loci.keys().contains(key))
         return QVariant( m_loci[key]->toString());
     else if( QString::compare(key,"Longitude", Qt::CaseInsensitive))
-        return QVariant( m_coord.longitude());
+        return QVariant( m_coord->longitude());
     else if( QString::compare(key, "Latitude", Qt::CaseInsensitive))
-        return QVariant( m_coord.latitude());
+        return QVariant( m_coord->latitude());
     else
         return QVariant();
 }

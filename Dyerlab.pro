@@ -38,7 +38,8 @@ SOURCES += \
     Frequencies.C \
     ResultObject.C \
     GeneticObject.C \
-    MapObject.C
+    MapObject.C \
+    JsonOps.C
 
 HEADERS += \
         MainWindow.H \
@@ -54,7 +55,8 @@ HEADERS += \
     Frequencies.H \
     ResultObject.H \
     GeneticObject.H \
-    MapObject.H
+    MapObject.H \
+    JsonOps.H
 
 mac {
 

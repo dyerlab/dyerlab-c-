@@ -1,6 +1,5 @@
 #include "LogWindow.H"
 #include <QVBoxLayout>
-#include <QSettings>
 
 LogWindow::LogWindow(QString msg , QWidget *parent) : QDialog( parent ) {
     m_textEdit = new QTextEdit(this);
@@ -17,16 +16,6 @@ LogWindow::LogWindow(QString msg , QWidget *parent) : QDialog( parent ) {
 
     this->setLayout( mainLayout );
     this->setWindowTitle("Dyerlab log file");
-
-    QSettings settings("Dyerlab","Dyerlab");
-    restoreGeometry( settings.value("logwindowGeometry").toByteArray() );
-}
-
-void LogWindow::closeEvent(QCloseEvent *event ) {
-    QSettings settings("Dyerlab","Dyerlab");
-    settings.setValue("logwindowGeometry", saveGeometry() );
-
-    event->accept();
 }
 
 

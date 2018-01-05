@@ -27,8 +27,8 @@ public:
     inline Locus* getLocus( QString key)                    { return m_loci[key]; }
     inline void addStratum( QString key, QString val  )     { m_strata[key] = val; }
     inline QString getStratum( QString key )                { return m_strata[key]; }
-    inline void addCoordinate( QGeoCoordinate val )         { m_coord = val; }
-    inline QGeoCoordinate getCoordinate()                   { return m_coord; }
+    inline void addCoordinate( QGeoCoordinate *val )        { m_coord = val; }
+    inline QGeoCoordinate* getCoordinate()                  { return m_coord; }
 
     QVariant getData( QString key );
     QStringList getKeys( DATA_KEY_TYPE type = DATA_KEY_TYPE_ALL );
@@ -37,7 +37,7 @@ public:
 private:
     QHash<QString,QString> m_strata;
     QHash<QString, Locus*> m_loci;
-    QGeoCoordinate m_coord;
+    QGeoCoordinate *m_coord;
 
 
 };

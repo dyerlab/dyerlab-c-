@@ -55,10 +55,10 @@ bool DataSet::makeMap() {
     Population *thePop = getPopulation();
     if( !thePop )
         return false;
-    QList<QGeoCoordinate> coords;
+    QList<QGeoCoordinate*> coords;
     for(int i=0;i<thePop->count();i++){
-        QGeoCoordinate c = thePop->getIndividual(i)->getCoordinate();
-        if( c.isValid() )
+        QGeoCoordinate *c = thePop->getIndividual(i)->getCoordinate();
+        if( c->isValid() )
             coords.append( c );
     }
     if( !coords.count() )

@@ -27,20 +27,24 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::saveSettings() {
-    QSettings settings("Dyerlab","Dyerlab");
-    settings.setValue("geometry", saveGeometry() );
-    settings.setValue("windowState", saveState() );
+
+    QSettings settings("dyerlab","dlab");
+    settings.setValue("mainwindow/size", size() );
+    settings.setValue("mainwindow/position", pos() );
     settings.setValue("splitter/state", mainSplitter->saveState() );
-    settings.setValue("splitter/geometry", mainSplitter->saveGeometry() );
+
+    qDebug() << "Saving settings";
 }
 
 
 void MainWindow::loadSettings() {
-    QSettings settings("Dyerlab","Dyerlab");
-    restoreGeometry( settings.value("geometry").toByteArray() );
-    restoreState( settings.value("windowState").toByteArray() );
-    mainSplitter->restoreState( settings.value("splitter/state").toByteArray());
-    mainSplitter->restoreGeometry( settings.value("splitter/geometry").toByteArray() );
+
+    QSettings settings("dyerlab","dlab");
+    resize( settings.value( "mainwindow/size", QSize(600,400)).toSize());
+    move( settings.value( "mainwindow/position", QPoint(200,200)).toPoint() );
+    mainSplitter->restoreState( settings.value("smplitter/state","").toByteArray() );
+
+    qDebug() << "Loading settings";
 }
 
 void MainWindow::makeActions() {
@@ -82,6 +86,7 @@ void MainWindow::makeMenus() {
 void MainWindow::makeUI() {
     mainSplitter = new QSplitter(this);
     mainSplitter->setFrameStyle(QFrame::NoFrame);
+
     setCentralWidget(mainSplitter);
 
     QWidget *treeMainWidget = new QWidget();
@@ -106,6 +111,9 @@ void MainWindow::makeUI() {
 
     mainSplitter->addWidget( treeMainWidget );
     mainSplitter->addWidget( stackedMainWidget );
+    mainSplitter->setStretchFactor(1,100);
+    mainSplitter->setStretchFactor(0,0);
+
 
     // make the data
     m_dataSet = new DataSet(treeWidget, stackedWidget, this);
@@ -129,7 +137,7 @@ void MainWindow::makeUI() {
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
-    saveSettings();
+    //saveSettings();
     QMainWindow::closeEvent( event );
 }
 

@@ -17,7 +17,6 @@ class LogWindow : public QDialog
 public:
     LogWindow(QString msg, QWidget *parent = 0);
 
-    void closeEvent(QCloseEvent *event );
 
 private:
     QTextEdit *m_textEdit;

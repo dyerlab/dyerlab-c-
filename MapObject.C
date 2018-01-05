@@ -1,10 +1,42 @@
 #include "MapObject.H"
+#include "JsonOps.H"
+
+#include <QFile>
+
 
 MapObject::MapObject(Population *population, QTreeWidgetItem *item, TREE_OBJECT_TYPE type ) :
     ResultObject(item,type)
 {
     QWebEngineView *view = new QWebEngineView();
     view->setObjectName("MapWebEngineView");
+
+
+    if( population->count()) {
+        QList<QGeoCoordinate*> coords;
+        for(int i=0;i<population->count();i++){
+            coords.append( population->getIndividual(i)->getCoordinate() );
+        }
+        QJsonObject json = geoCoordinateList2Json(coords);
+        QJsonDocument doc(json);
+        if( !doc.isEmpty() ) {
+            QFile file("/Users/rodney/Desktop/test.json");
+            if( file.open( QIODevice::WriteOnly ) ) {
+                qDebug() << "writing";
+                file.write(doc.toJson(QJsonDocument::Indented));
+            }
+            else {
+                qDebug() << "Cannot open file";
+            }
+            file.close();
+
+        }
+
+
+    }
+
+
+
+    /*
 
     Q_UNUSED(population);
 
@@ -15,7 +47,7 @@ MapObject::MapObject(Population *population, QTreeWidgetItem *item, TREE_OBJECT_
         view->setHtml(page);
     }
 
-/*
+
     m_htmlHeader = QString("<!DOCTYPE html><html><head>"
                            "<title>Quick Start - Leaflet</title>"
                            "<meta charset=\"utf-8\" />"
