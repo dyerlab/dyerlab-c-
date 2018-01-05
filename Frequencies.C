@@ -5,6 +5,15 @@ Frequencies::Frequencies(QString name) {
     m_N = m_Ngenos = m_Nhets = 0.0;
 }
 
+bool Frequencies::grabFromPopulation( Population *population, QString key ) {
+    int N = population->count();
+    if( !N )
+        return false;
+    for(int i=0;i<N;i++){
+        addLocus( population->getIndividual(i)->getLocus(key));
+    }
+    return true;
+}
 
 void Frequencies::addLocus( Locus *loc ) {
     QStringList alleles = loc->alleles();

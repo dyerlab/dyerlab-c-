@@ -5,16 +5,16 @@
 
 
 MapObject::MapObject(Population *population, QTreeWidgetItem *item, TREE_OBJECT_TYPE type ) :
-    ResultObject(item,type)
+    ResultObject(population,item,type)
 {
     QWebEngineView *view = new QWebEngineView();
     view->setObjectName("MapWebEngineView");
 
 
-    if( population->count()) {
+    if( m_population->count()) {
         QList<QGeoCoordinate*> coords;
-        for(int i=0;i<population->count();i++){
-            coords.append( population->getIndividual(i)->getCoordinate() );
+        for(int i=0;i<m_population->count();i++){
+            coords.append( m_population->getIndividual(i)->getCoordinate() );
         }
         QJsonObject json = geoCoordinateList2Json(coords);
         QJsonDocument doc(json);
@@ -22,7 +22,7 @@ MapObject::MapObject(Population *population, QTreeWidgetItem *item, TREE_OBJECT_
             QFile file("/Users/rodney/Desktop/test.json");
             if( file.open( QIODevice::WriteOnly ) ) {
                 qDebug() << "writing";
-                file.write(doc.toJson(QJsonDocument::Indented));
+                file.write(doc.toJson());
             }
             else {
                 qDebug() << "Cannot open file";

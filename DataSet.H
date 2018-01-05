@@ -24,6 +24,8 @@ public:
 
     bool makeMap();
 
+    bool getAllFrequencies();
+
     void setNewObject( ResultObject *obj );
     void appendToLog( QString msg );
     inline QString getLog() const             { return m_log; }

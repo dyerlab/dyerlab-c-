@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui webenginewidgets positioning
+QT       += core gui webenginewidgets positioning charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -39,7 +39,9 @@ SOURCES += \
     ResultObject.C \
     GeneticObject.C \
     MapObject.C \
-    JsonOps.C
+    JsonOps.C \
+    FrequencyObject.C \
+    Charting.C
 
 HEADERS += \
         MainWindow.H \
@@ -56,7 +58,9 @@ HEADERS += \
     ResultObject.H \
     GeneticObject.H \
     MapObject.H \
-    JsonOps.H
+    JsonOps.H \
+    FrequencyObject.H \
+    Charting.H
 
 mac {
 

@@ -3,6 +3,7 @@
 
 #include "MapObject.H"
 #include "GeneticObject.H"
+#include "FrequencyObject.H"
 
 #include <QDate>
 #include <QDebug>
@@ -67,13 +68,25 @@ bool DataSet::makeMap() {
     //TODO: Add conversion to GeoJSON from
     QTreeWidgetItem *itm = new QTreeWidgetItem( m_treeWidget, TREE_OBJECT_TYPE_MAP );
     itm->setText(0,tr("Map"));
-    itm->setSelected( true );
+
     MapObject *obj = new MapObject( getPopulation(), itm );
     setNewObject( obj );
 
     return true;
 }
 
+
+
+bool DataSet::getAllFrequencies() {
+
+    QTreeWidgetItem *item = new QTreeWidgetItem( m_treeWidget, TREE_OBJECT_TYPE_FREQUENCIES );
+    item->setText(0,"Allele Frequencies");
+
+    FrequencyObject *obj = new FrequencyObject(getPopulation(), item );
+    setNewObject( obj );
+    return true;
+
+}
 
 
 

@@ -5,11 +5,14 @@
 #include <QString>
 
 #include "Locus.H"
+#include "Population.H"
 
 class Frequencies
 {
 public:
     Frequencies(QString name);
+
+    bool grabFromPopulation(Population *population, QString key );
 
     void addLocus( Locus *loc );
     double getFrequency( QString allele );

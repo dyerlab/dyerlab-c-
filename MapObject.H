@@ -4,8 +4,7 @@
 #include "ResultObject.H"
 #include "Population.H"
 
-#include <QString>
-#include <QWebEngineView>
+
 
 class MapObject : public ResultObject
 {

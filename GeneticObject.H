@@ -16,7 +16,6 @@ public:
     inline Population* getPopulation()      { return m_population; }
 
 private:
-    Population *m_population;
     TableModel *m_tableModel;
 
 };
