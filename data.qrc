@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/data">
         <file>pedima_baja.csv</file>
+        <file>leaflet.html</file>
     </qresource>
 </RCC>

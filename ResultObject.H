@@ -1,7 +1,10 @@
 #ifndef ANALYSISOBJECT_H
 #define ANALYSISOBJECT_H
 
+#include <QFile>
+#include <QString>
 #include <QWidget>
+#include <QTextStream>
 #include <QTreeWidgetItem>
 
 typedef enum {
@@ -19,6 +22,7 @@ public:
 
     ResultObject(QTreeWidgetItem *item, TREE_OBJECT_TYPE type = TREE_OBJECT_TYPE_UNDEF);
 
+    inline QTreeWidgetItem* getTreeWidgetItem() { return m_treeWidgetItem; }
     inline TREE_OBJECT_TYPE objectType()        { return m_treeObjectType; }
     inline QWidget* getWidget()                 { return m_widget; }
 

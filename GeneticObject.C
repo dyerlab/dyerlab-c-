@@ -8,5 +8,5 @@ GeneticObject::GeneticObject(Population *population, QTreeWidgetItem *item, TREE
     QTableView *table = new QTableView();
     table->setModel(m_tableModel);
     m_widget = table;
-
+    m_widget->setContentsMargins(0,0,0,0);
 }

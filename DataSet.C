@@ -1,5 +1,7 @@
 #include "DataSet.H"
 #include "FileIO.H"
+
+#include "MapObject.H"
 #include "GeneticObject.H"
 
 #include <QDate>
@@ -22,6 +24,8 @@ DataSet::~DataSet(){
 void DataSet::setNewObject( ResultObject *obj ) {
     m_stackedWidget->addWidget( obj->getWidget() );
     m_stackedWidget->setCurrentIndex( m_stackedWidget->indexOf( obj->getWidget() ) );
+    m_treeWidget->selectionModel()->clearSelection();
+    obj->getTreeWidgetItem()->setSelected(true);
     m_resultObjects.append( obj );
 }
 
@@ -47,6 +51,32 @@ bool DataSet::loadPopulation(QString path, int strata, int coords, int loci) {
     return true;
 }
 
+bool DataSet::makeMap() {
+    Population *thePop = getPopulation();
+    if( !thePop )
+        return false;
+    QList<QGeoCoordinate> coords;
+    for(int i=0;i<thePop->count();i++){
+        QGeoCoordinate c = thePop->getIndividual(i)->getCoordinate();
+        if( c.isValid() )
+            coords.append( c );
+    }
+    if( !coords.count() )
+        return false;
+
+    //TODO: Add conversion to GeoJSON from
+    QTreeWidgetItem *itm = new QTreeWidgetItem( m_treeWidget, TREE_OBJECT_TYPE_MAP );
+    itm->setText(0,tr("Map"));
+    itm->setSelected( true );
+    MapObject *obj = new MapObject( getPopulation(), itm );
+    setNewObject( obj );
+
+    return true;
+}
+
+
+
+
 Population* DataSet::getPopulation() {
 
     foreach(ResultObject *obj, m_resultObjects ){
@@ -64,23 +94,7 @@ Population* DataSet::getPopulation() {
 }
 
 
-bool DataSet::makeMap() {
-    Population *thePop = getPopulation();
-    if( !thePop )
-        return false;
-    QList<QGeoCoordinate> coords;
-    for(int i=0;i<thePop->count();i++){
-        QGeoCoordinate c = thePop->getIndividual(i)->getCoordinate();
-        if( c.isValid() )
-            coords.append( c );
-    }
-    if( !coords.count() )
-        return false;
 
-    //TODO: Add conversion to GeoJSON from
-
-    return true;
-}
 
 void DataSet::appendToLog( QString msg ) {
     QString now = QDateTime::currentDateTime().toLocalTime().toString(Qt::ISODateWithMs);

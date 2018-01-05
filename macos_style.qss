@@ -67,3 +67,9 @@ QHeaderView::section {
     border: 0px solid red;
     text-align: center;
 }
+
+
+
+QWebEngineView {
+    border: 1px solid red;
+}

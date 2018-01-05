@@ -177,5 +177,5 @@ void MainWindow::slotShowLog() {
 }
 
 void MainWindow::slotMakeMap() {
-    qDebug() << "SlotMakemap";
+    m_dataSet->makeMap();
 }
