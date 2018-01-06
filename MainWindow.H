@@ -34,6 +34,8 @@ private:
 
     QAction *makeMapAction;
 
+    QAction *allAlleleFrequencyAction;
+
     QSplitter *mainSplitter;
     QTreeWidget *treeWidget;
     QStackedWidget *stackedWidget;
@@ -54,6 +56,7 @@ private:
 
 public slots:
     void slotImportGenotypes();
+    void slotEstimateAllAlleleFrequencies();
     void slotMakeMap();
     void slotShowLog();
     void slotQuit();

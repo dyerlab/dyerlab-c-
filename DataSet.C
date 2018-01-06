@@ -99,7 +99,6 @@ Population* DataSet::getPopulation() {
             if( gen ) {
                 return gen->getPopulation();
             }
-
         }
     }
 

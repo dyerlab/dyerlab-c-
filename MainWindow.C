@@ -57,6 +57,13 @@ void MainWindow::makeActions() {
     makeMapAction->setEnabled(false);
     connect( makeMapAction, SIGNAL( triggered(bool)), this, SLOT( slotMakeMap()) );
 
+
+    allAlleleFrequencyAction = new QAction(tr("All Loci"), this);
+    allAlleleFrequencyAction->setShortcut(tr("CTRL+F"));
+    allAlleleFrequencyAction->setEnabled(false);
+    connect( allAlleleFrequencyAction, SIGNAL(triggered(bool)), this, SLOT(slotEstimateAllAlleleFrequencies()));
+
+
     showLogAction = new QAction( tr("&Log"), this);
     showLogAction->setShortcut(tr("CTRL+L") );
     connect( showLogAction, SIGNAL(triggered(bool)), this , SLOT( slotShowLog()) );
@@ -75,6 +82,9 @@ void MainWindow::makeMenus() {
     fileMenu->addMenu( importMenu );
     fileMenu->addSeparator();
     fileMenu->addAction( quitAction );
+
+    QMenu *freqMenu = menuBar()->addMenu(tr("&Frequencies"));
+    freqMenu->addAction( allAlleleFrequencyAction );
 
     QMenu *mapMenu = menuBar()->addMenu(tr("&Map"));
     mapMenu->addAction(makeMapAction);
@@ -144,6 +154,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 void MainWindow::enableMenuItems( bool enabled ){
     importGenotypeAction->setEnabled( !enabled );
     makeMapAction->setEnabled( enabled );
+    allAlleleFrequencyAction->setEnabled( enabled );
 }
 
 
@@ -186,4 +197,8 @@ void MainWindow::slotShowLog() {
 
 void MainWindow::slotMakeMap() {
     m_dataSet->makeMap();
+}
+
+void MainWindow::slotEstimateAllAlleleFrequencies() {
+    m_dataSet->getAllFrequencies();
 }
