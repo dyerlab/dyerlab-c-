@@ -15,7 +15,10 @@ FrequencyObject::FrequencyObject(Population *population, QTreeWidgetItem *item, 
     if( !loci.count() )
         return;
 
+
+
     QWidget *mainWidget = new QWidget();
+
     QVBoxLayout *mainLayout = new QVBoxLayout();
     mainWidget->setLayout( mainLayout );
 
@@ -28,9 +31,11 @@ FrequencyObject::FrequencyObject(Population *population, QTreeWidgetItem *item, 
             QList<double> values = freqs->getFrequencies( alleles );
 
             QChart *chart = makeBarChart(values,alleles,"Alleles","Frequency",locus);
-            QChartView *view = new QChartView(chart);
-            view->setRenderHint( QPainter::Antialiasing );
 
+            QChartView *view = new QChartView();
+            view->setChart( chart );
+            view->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+            view->setRenderHint( QPainter::Antialiasing );
             mainLayout->addWidget( view );
         }
         else {
@@ -39,7 +44,11 @@ FrequencyObject::FrequencyObject(Population *population, QTreeWidgetItem *item, 
         delete freqs;
     }
 
-    m_widget = mainWidget;
+    QScrollArea *scroller  = new QScrollArea();
+    scroller->setWidget( mainWidget );
+    scroller->setBackgroundRole( QPalette::Light );
+    scroller->setSizeAdjustPolicy( QAbstractScrollArea::AdjustToContents );
+    m_widget = scroller;
     m_widget->setContentsMargins(0,0,0,0);
 
 
