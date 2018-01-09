@@ -62,6 +62,8 @@ public slots:
     void slotQuit();
 
 
+
+
 };
 
 #endif // MAINWINDOW_H

@@ -112,3 +112,15 @@ void DataSet::appendToLog( QString msg ) {
     QString now = QDateTime::currentDateTime().toLocalTime().toString(Qt::ISODateWithMs);
     m_log = QString("%1[%2]: %3\n").arg( m_log ).arg(now).arg( msg );
 }
+
+
+
+
+void DataSet::treeWidgetChanged( QTreeWidgetItem *current, QTreeWidgetItem *previous) {
+    Q_UNUSED( previous );
+    foreach( ResultObject *obj, m_resultObjects){
+        if( current == obj->getTreeWidgetItem())
+            m_stackedWidget->setCurrentWidget( obj->getWidget() );
+    }
+}
+

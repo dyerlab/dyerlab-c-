@@ -33,6 +33,7 @@ public:
 signals:
 
 public slots:
+    void treeWidgetChanged( QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
 
 private:

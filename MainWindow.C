@@ -127,6 +127,8 @@ void MainWindow::makeUI() {
 
     // make the data
     m_dataSet = new DataSet(treeWidget, stackedWidget, this);
+    connect( treeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
+             m_dataSet, SLOT(treeWidgetChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
 
     // set up some stylesheets
 #ifdef Q_OS_MACOS
@@ -202,3 +204,6 @@ void MainWindow::slotMakeMap() {
 void MainWindow::slotEstimateAllAlleleFrequencies() {
     m_dataSet->getAllFrequencies();
 }
+
+
+

@@ -16,6 +16,7 @@ LogWindow::LogWindow(QString msg , QWidget *parent) : QDialog( parent ) {
 
     this->setLayout( mainLayout );
     this->setWindowTitle("Dyerlab log file");
+
 }
 
 
