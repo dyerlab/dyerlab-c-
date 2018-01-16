@@ -41,7 +41,10 @@ SOURCES += \
     MapObject.C \
     JsonOps.C \
     FrequencyObject.C \
-    Charting.C
+    Charting.C \
+    Graph2DObject.C \
+    Node.C \
+    Edge.C
 
 HEADERS += \
         MainWindow.H \
@@ -60,7 +63,10 @@ HEADERS += \
     MapObject.H \
     JsonOps.H \
     FrequencyObject.H \
-    Charting.H
+    Charting.H \
+    Graph2DObject.H \
+    Node.H \
+    Edge.H
 
 mac {
 

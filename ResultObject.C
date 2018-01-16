@@ -5,3 +5,9 @@ ResultObject::ResultObject(Population *population, QTreeWidgetItem *item, TREE_O
     m_treeWidgetItem = item;
     m_treeObjectType = type;
 }
+
+
+ResultObject::ResultObject(QTreeWidgetItem *item, TREE_OBJECT_TYPE type) {
+    m_treeWidgetItem = item;
+    m_treeObjectType = type;
+}
